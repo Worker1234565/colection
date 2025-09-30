@@ -5,6 +5,8 @@
  */
 package ui;
 
+import java.awt.List;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,6 +14,7 @@ import java.util.Set;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Person;
+import model.Product;
 
 /**
  *
@@ -265,19 +268,38 @@ public class MainPanel extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        String name = jTextField3.getText();
-        String category = jTextField4.getText();
-        int priceKop = Integer.parseInt(jTextField5.getText());
-        double priceRuble = priceKop / 100.0;
-        String priceDisplay = priceRuble+" руб.";
-        Object[] row = {name, category, priceDisplay};
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        model.addRow(row);
-        jTextField3.setText("");
-        jTextField4.setText("");
-        jTextField5.setText("");
+
+Map<String, Product> product = new HashMap<>();
+product.put(jTextField1.getText(), new Product(jTextField3.getText(),
+                                               jTextField4.getText(),
+                                               jTextField5.getText() ));
+        for (Map.Entry<String, Product> entry : product.entrySet()) {
+            String key = entry.getKey();
+            Product value = entry.getValue();
+            String price = value.getPrise();
+            String row[]={value.getName(),value.getCategory(), String.valueOf(price)};
+            dtm2.addRow(row);
+        }
+
+
+
+//        String name = jTextField3.getText();
+//        String category = jTextField4.getText();
+//        int priceKop = Integer.parseInt(jTextField5.getText());
+//        double priceRuble = priceKop / 100.0;
+//        String priceDisplay = priceRuble+" руб.";
+//        Object[] row = {name, category, priceDisplay};
+//        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+//        model.addRow(row);
+//        jTextField3.setText("");
+//        jTextField4.setText("");
+//        jTextField5.setText("");
 
     }//GEN-LAST:event_jButton2ActionPerformed
+
+
+// Метод для добавления продукта
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
